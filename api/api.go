@@ -17,10 +17,8 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"net/url"
-	"sort"
 	"strings"
 	"time"
 )
@@ -45,15 +43,12 @@ func getSign(fMaps finallyMap, appSecret string) string {
 		sMaps = append(sMaps, k)
 	}
 
-	sort.Strings(sMaps)
-
-	log.Println(sMaps)
 	signatureStr := appSecret
 	for _, k := range sMaps {
 		signatureStr += k + fMaps[k]
 	}
 	signatureStr += appSecret
-	log.Println(signatureStr)
+
 	sign := getMD5(signatureStr)
 	return sign
 }
