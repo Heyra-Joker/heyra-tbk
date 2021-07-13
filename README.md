@@ -1,9 +1,15 @@
 # heyra-tbk
 
-### 下载方式
-`go get -u github.com/Heyra-Joker/heyra-tbk`
+### download
+`go get github.com/Heyra-Joker/heyra-tbk`
 
-### 目前支持
+### have old version, update
+`go get github.com/Heyra-Joker/heyra-tbk@releases`
+
+#### like
+`go get github.com/Heyra-Joker/heyra-tbk@v1.0.0`
+
+### Methods
 
 - tbkCouponGetRequest.go
 - tbkDgOptimusMaterialRequest.go
