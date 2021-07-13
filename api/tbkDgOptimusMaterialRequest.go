@@ -1,9 +1,9 @@
 /*
 @author:Joker
-@file: tbkDgOptimusMaterial.go
-@time: 2021/7/12/11:10 上午
+@file: tbkDgOptimusMaterialRequest.go
+@time: 2021/7/13/11:13 上午
 @blog: https://github.com/joker-heyra
-@description: https://open.taobao.com/api.htm?docId=33947&docType=2&scopeId=16518#requestParams
+@description: --
 
 🤡
 code is far away from bugs with the god animal protecting
@@ -12,9 +12,9 @@ code is far away from bugs with the god animal protecting
 */
 package api
 
-type TbkDgOptimusMaterial struct {
+type TbkDgOptimusMaterialRequest struct {
 	PageSize      string `json:"page_size"`
-	AdZoneId      string `json:"adzone_id"`
+	AdzoneId      string `json:"adzone_id"`
 	PageNo        string `json:"page_no"`
 	MaterialId    string `json:"material_id"`
 	DeviceValue   string `json:"device_value"`
@@ -26,11 +26,10 @@ type TbkDgOptimusMaterial struct {
 	FavoritesId   string `json:"favorites_id"`
 }
 
-func (t *TbkDgOptimusMaterial) GetResponse(rest Rest) (string, error) {
+func (t *TbkDgOptimusMaterialRequest) GetResponse(rest Rest) (string, error) {
 	bMap := convertBusinessMap(t)
 	pMap := convertPublicMap(rest, "taobao.tbk.dg.optimus.material")
 	fMaps := convert([]map[string]string{bMap, pMap})
 	sign := getSign(fMaps, rest.AppSecret)
 	return request(fMaps, sign, rest.RestUrl)
-
 }

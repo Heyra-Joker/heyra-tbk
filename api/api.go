@@ -19,6 +19,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"sort"
 	"strings"
 	"time"
 )
@@ -43,6 +44,7 @@ func getSign(fMaps finallyMap, appSecret string) string {
 		sMaps = append(sMaps, k)
 	}
 
+	sort.Strings(sMaps)
 	signatureStr := appSecret
 	for _, k := range sMaps {
 		signatureStr += k + fMaps[k]
