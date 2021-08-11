@@ -20,6 +20,7 @@ import (
 	"net/http"
 	"sort"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -38,6 +39,7 @@ type Rest struct {
 }
 
 var hexes = md5.New()
+var mutex sync.Mutex
 
 func getSign(fMaps finallyMap, appSecret string) string {
 	var sMaps = make([]string, len(fMaps))
@@ -52,7 +54,9 @@ func getSign(fMaps finallyMap, appSecret string) string {
 	}
 	signatureStr += appSecret
 
+	mutex.Lock()
 	sign := getMD5(signatureStr)
+	mutex.Unlock()
 	return sign
 }
 
@@ -110,7 +114,6 @@ func convert(maps []map[string]string) finallyMap {
 
 func getMD5(str string) string {
 	hexes.Write([]byte(str))
-	strings.ToUpper(hex.EncodeToString(hexes.Sum(nil)))
 	return strings.ToUpper(hex.EncodeToString(hexes.Sum(nil)))
 }
 
