@@ -114,7 +114,9 @@ func convert(maps []map[string]string) finallyMap {
 
 func getMD5(str string) string {
 	hexes.Write([]byte(str))
-	return strings.ToUpper(hex.EncodeToString(hexes.Sum(nil)))
+	s := strings.ToUpper(hex.EncodeToString(hexes.Sum(nil)))
+	hexes.Reset()
+	return s
 }
 
 func request(fMaps finallyMap, sign, restUrl string) (string, error) {
