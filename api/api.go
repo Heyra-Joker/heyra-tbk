@@ -18,7 +18,6 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
-	"net/url"
 	"sort"
 	"strings"
 	"time"
@@ -38,9 +37,11 @@ type Rest struct {
 	Other     map[string]string // 其他公共参数，使用 key-value 形式
 }
 
+var hexes = md5.New()
+
 func getSign(fMaps finallyMap, appSecret string) string {
-	sMaps := []string{}
-	for k, _ := range fMaps {
+	var sMaps = make([]string, len(fMaps))
+	for k := range fMaps {
 		sMaps = append(sMaps, k)
 	}
 
@@ -56,8 +57,7 @@ func getSign(fMaps finallyMap, appSecret string) string {
 }
 
 func convertBusinessMap(v interface{}) businessMap {
-	var dataMap = make(businessMap)
-	var bMap = make(businessMap)
+	var dataMap businessMap
 
 	data, err := json.Marshal(v) // Convert to a json string
 
@@ -70,17 +70,11 @@ func convertBusinessMap(v interface{}) businessMap {
 		panic(err)
 	}
 
-	for k, v := range dataMap {
-		if v != "" {
-			bMap[k] = v
-		}
-	}
-	return bMap
+	return dataMap
 }
 
 func convertPublicMap(rest Rest, method string) publicMap {
-	var pMap = make(publicMap)
-	session := rest.Session
+	var pMap = make(publicMap, 11)
 	v := rest.V
 	if v == "" {
 		v = "2.0"
@@ -91,7 +85,7 @@ func convertPublicMap(rest Rest, method string) publicMap {
 	pMap["v"] = v
 	pMap["sign_method"] = "md5"
 	pMap["method"] = method
-	if session != "" {
+	if rest.Session != "" {
 		pMap["session"] = rest.Session
 	}
 
@@ -100,12 +94,11 @@ func convertPublicMap(rest Rest, method string) publicMap {
 			pMap[k] = v
 		}
 	}
-
 	return pMap
 }
 
 func convert(maps []map[string]string) finallyMap {
-	fMaps := map[string]string{}
+	var fMaps = make(map[string]string)
 
 	for _, map_ := range maps {
 		for k, v := range map_ {
@@ -116,22 +109,24 @@ func convert(maps []map[string]string) finallyMap {
 }
 
 func getMD5(str string) string {
-	h := md5.New()
-	h.Write([]byte(str))
-	strings.ToUpper(hex.EncodeToString(h.Sum(nil)))
-	return strings.ToUpper(hex.EncodeToString(h.Sum(nil)))
+	hexes.Write([]byte(str))
+	strings.ToUpper(hex.EncodeToString(hexes.Sum(nil)))
+	return strings.ToUpper(hex.EncodeToString(hexes.Sum(nil)))
 }
 
 func request(fMaps finallyMap, sign, restUrl string) (string, error) {
-	urlParams := url.Values{}
+	params := strings.Builder{}
 
 	for k, v := range fMaps {
-		urlParams.Add(k, v)
+		params.WriteString(k)
+		params.WriteString("=")
+		params.WriteString(v)
+		params.WriteString("&")
 	}
+	params.WriteString("&sign=")
+	params.WriteString(sign)
 
-	urlParams.Add("sign", sign)
-
-	resp, err := http.Post(restUrl, "application/x-www-form-urlencoded", strings.NewReader(urlParams.Encode()))
+	resp, err := http.Post(restUrl, "application/x-www-form-urlencoded", strings.NewReader(params.String()))
 
 	if resp != nil {
 		defer resp.Body.Close()

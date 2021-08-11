@@ -13,9 +13,9 @@ code is far away from bugs with the god animal protecting
 package api
 
 type TbkCouponGetRequest struct {
-	Me         string `json:"me"`
-	ItemId     string `json:"item_id"`
-	ActivityId string `json:"activity_id"`
+	Me         string `json:"me,omitempty"`
+	ItemId     string `json:"item_id,omitempty"`
+	ActivityId string `json:"activity_id,omitempty"`
 }
 
 func (t *TbkCouponGetRequest) GetResponse(rest Rest) (string, error) {

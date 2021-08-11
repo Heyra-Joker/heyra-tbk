@@ -13,7 +13,7 @@ code is far away from bugs with the god animal protecting
 package api
 
 type TbkDgVegasTljInstanceReportRequest struct {
-	RightsId string `json:"rights_id"`
+	RightsId string `json:"rights_id,omitempty"`
 }
 
 func (t *TbkDgVegasTljInstanceReportRequest) GetResponse(rest Rest) (string, error) {

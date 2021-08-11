@@ -13,17 +13,17 @@ code is far away from bugs with the god animal protecting
 package api
 
 type TbkDgOptimusMaterial struct {
-	PageSize      string `json:"page_size"`
-	AdZoneId      string `json:"adzone_id"`
-	PageNo        string `json:"page_no"`
-	MaterialId    string `json:"material_id"`
-	DeviceValue   string `json:"device_value"`
-	DeviceEncrypt string `json:"device_encrypt"`
-	DeviceType    string `json:"device_type"`
-	ContentId     string `json:"content_id"`
-	ContentSource string `json:"content_source"`
-	ItemId        string `json:"item_id"`
-	FavoritesId   string `json:"favorites_id"`
+	PageSize      string `json:"page_size,omitempty"`
+	AdZoneId      string `json:"adzone_id,omitempty"`
+	PageNo        string `json:"page_no,omitempty"`
+	MaterialId    string `json:"material_id,omitempty"`
+	DeviceValue   string `json:"device_value,omitempty"`
+	DeviceEncrypt string `json:"device_encrypt,omitempty"`
+	DeviceType    string `json:"device_type,omitempty"`
+	ContentId     string `json:"content_id,omitempty"`
+	ContentSource string `json:"content_source,omitempty"`
+	ItemId        string `json:"item_id,omitempty"`
+	FavoritesId   string `json:"favorites_id,omitempty"`
 }
 
 func (t *TbkDgOptimusMaterial) GetResponse(rest Rest) (string, error) {

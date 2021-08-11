@@ -13,10 +13,10 @@ code is far away from bugs with the god animal protecting
 package api
 
 type TbkDgOptimusPromotionRequest struct {
-	PageSize    string `json:"page_size"`
-	PageNum     string `json:"page_num"`
-	AdzoneId    string `json:"adzone_id"`
-	PromotionId string `json:"promotion_id"`
+	PageSize    string `json:"page_size,omitempty"`
+	PageNum     string `json:"page_num,omitempty"`
+	AdzoneId    string `json:"adzone_id,omitempty"`
+	PromotionId string `json:"promotion_id,omitempty"`
 }
 
 func (t *TbkDgOptimusPromotionRequest) GetResponse(rest Rest) (string, error) {

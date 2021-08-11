@@ -13,13 +13,13 @@ code is far away from bugs with the god animal protecting
 package api
 
 type JuItemsSearchRequest struct {
-	CurrentPage      string `json:"current_page"`
-	PageSize         string `json:"page_size"`
-	Pid              string `json:"pid"`
-	Postage          string `json:"postage"`
-	Status           string `json:"status"`
-	TaobaoCategoryId string `json:"taobao_category_id"`
-	Word             string `json:"word"`
+	CurrentPage      string `json:"current_page,omitempty"`
+	PageSize         string `json:"page_size,omitempty"`
+	Pid              string `json:"pid,omitempty"`
+	Postage          string `json:"postage,omitempty"`
+	Status           string `json:"status,omitempty"`
+	TaobaoCategoryId string `json:"taobao_category_id,omitempty"`
+	Word             string `json:"word,omitempty"`
 }
 
 func (j *JuItemsSearchRequest) GetResponse(rest Rest) (string, error) {

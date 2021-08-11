@@ -13,11 +13,11 @@ code is far away from bugs with the god animal protecting
 package api
 
 type TbkActivityInfoGetRequest struct {
-	AdzoneId           string `json:"adzone_id"`
-	SubPid             string `json:"sub_pid"`
-	RelationId         string `json:"relation_id"`
-	ActivityMaterialId string `json:"activity_material_id"`
-	UnionId            string `json:"union_id"`
+	AdzoneId           string `json:"adzone_id,omitempty"`
+	SubPid             string `json:"sub_pid,omitempty"`
+	RelationId         string `json:"relation_id,omitempty"`
+	ActivityMaterialId string `json:"activity_material_id,omitempty"`
+	UnionId            string `json:"union_id,omitempty"`
 }
 
 func (t *TbkActivityInfoGetRequest) GetResponse(rest Rest) (string, error) {

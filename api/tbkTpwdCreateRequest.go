@@ -13,11 +13,11 @@ code is far away from bugs with the god animal protecting
 package api
 
 type TbkTpwdCreateRequest struct {
-	Url    string `json:"url"`
-	Text   string `json:"text"`
-	Logo   string `json:"logo"`
-	Ext    string `json:"ext"`
-	UserId string `json:"user_id"`
+	Url    string `json:"url,omitempty"`
+	Text   string `json:"text,omitempty"`
+	Logo   string `json:"logo,omitempty"`
+	Ext    string `json:"ext,omitempty"`
+	UserId string `json:"user_id,omitempty"`
 }
 
 func (t *TbkTpwdCreateRequest) GetResponse(rest Rest) (string, error) {

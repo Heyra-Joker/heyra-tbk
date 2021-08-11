@@ -13,10 +13,10 @@ code is far away from bugs with the god animal protecting
 package api
 
 type TbkShopRecommendGetRequest struct {
-	Fields   string `json:"fields"`
-	UserId   string `json:"user_id"`
-	Count    string `json:"count"`
-	Platform string `json:"platform"`
+	Fields   string `json:"fields,omitempty"`
+	UserId   string `json:"user_id,omitempty"`
+	Count    string `json:"count,omitempty"`
+	Platform string `json:"platform,omitempty"`
 }
 
 func (t *TbkShopRecommendGetRequest) GetResponse(rest Rest) (string, error) {

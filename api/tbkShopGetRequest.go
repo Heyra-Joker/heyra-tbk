@@ -13,21 +13,21 @@ code is far away from bugs with the god animal protecting
 package api
 
 type TbkShopGetRequest struct {
-	Fields              string `json:"fields"`
-	Q                   string `json:"q"`
-	Sort                string `json:"sort"`
-	IsTmall             string `json:"is_tmall"`
-	StartCredit         string `json:"start_credit"`
-	EndCredit           string `json:"end_credit"`
-	StartCommissionRate string `json:"start_commission_rate"`
-	EndCommissionRate   string `json:"end_commission_rate"`
-	StartTotalAction    string `json:"start_total_action"`
-	EndTotalAction      string `json:"end_total_action"`
-	StartAuctionCount   string `json:"start_auction_count"`
-	EndAuctionCount     string `json:"end_auction_count"`
-	Platform            string `json:"platform"`
-	PageNo              string `json:"page_no"`
-	PageSize            string `json:"page_size"`
+	Fields              string `json:"fields,omitempty"`
+	Q                   string `json:"q,omitempty"`
+	Sort                string `json:"sort,omitempty"`
+	IsTmall             string `json:"is_tmall,omitempty"`
+	StartCredit         string `json:"start_credit,omitempty"`
+	EndCredit           string `json:"end_credit,omitempty"`
+	StartCommissionRate string `json:"start_commission_rate,omitempty"`
+	EndCommissionRate   string `json:"end_commission_rate,omitempty"`
+	StartTotalAction    string `json:"start_total_action,omitempty"`
+	EndTotalAction      string `json:"end_total_action,omitempty"`
+	StartAuctionCount   string `json:"start_auction_count,omitempty"`
+	EndAuctionCount     string `json:"end_auction_count,omitempty"`
+	Platform            string `json:"platform,omitempty"`
+	PageNo              string `json:"page_no,omitempty"`
+	PageSize            string `json:"page_size,omitempty"`
 }
 
 func (t *TbkShopGetRequest) GetResponse(rest Rest) (string, error) {

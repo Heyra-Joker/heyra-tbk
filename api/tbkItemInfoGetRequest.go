@@ -13,9 +13,9 @@ code is far away from bugs with the god animal protecting
 package api
 
 type TbkItemInfoGetRequest struct {
-	NumIids  string `json:"num_iids"`
-	Platform string `json:"platform"`
-	Ip       string `json:"ip"`
+	NumIids  string `json:"num_iids,omitempty"`
+	Platform string `json:"platform,omitempty"`
+	Ip       string `json:"ip,omitempty"`
 }
 
 func (t *TbkItemInfoGetRequest) GetResponse(rest Rest) (string, error) {
