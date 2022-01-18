@@ -18,6 +18,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 	"sort"
 	"strings"
 	"sync"
@@ -125,7 +126,7 @@ func request(fMaps finallyMap, sign, restUrl string) (string, error) {
 	for k, v := range fMaps {
 		params.WriteString(k)
 		params.WriteString("=")
-		params.WriteString(v)
+		params.WriteString(url.QueryEscape(v))
 		params.WriteString("&")
 	}
 	params.WriteString("&sign=")
